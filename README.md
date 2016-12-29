@@ -15,6 +15,8 @@ measurements on the mean and standard deviation, as well as the identifiers on a
 
 The next step is to substitute the activity numbers by activity names, which is done using sapply.
 
+After this, the gsub() function is used to substitute abbreviations in variable names by proper names.
+
 Lastly, dplyr package is loaded to group the data by subject and activities and summarize all other variables according 
 to their mean.
 
