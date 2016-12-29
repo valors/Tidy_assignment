@@ -44,7 +44,6 @@ X<-rbind(X_train,X_test)
 rm(X_train,X_test,y_train,y_test,subject_test,subject_train,features)
 
 #2. Extracts only the measurements on the mean and standard deviation for each measurement.
-#4. Appropriately labels the data set with descriptive variable names.
 
 # For this we need a regular expression that identifies column names containing either "mean()" or "std()", and also
 # "activities" or "subject"
@@ -67,6 +66,16 @@ X_extract$activities<-sapply(X_extract$activities,function(x){activities$V2[x]})
 
 rm(activities)
 
+#4. Appropriately labels the data set with descriptive variable names. We use gsub to substitute the abbreviations by proper words.
+
+names(X_extract)<-gsub("Acc","Acceleration",names(X_extract))
+names(X_extract)<-gsub("^t","TimeDomain",names(X_extract))
+names(X_extract)<-gsub("^f","FrequencyDomain",names(X_extract))
+names(X_extract)<-gsub("-mean\\(\\)","Mean",names(X_extract))
+names(X_extract)<-gsub("-std\\(\\)","StandardDeviation", names(X_extract))
+names(X_extract)<-gsub("Mag","Magnitude",names(X_extract))
+names(X_extract)<-gsub("Gyro","Gyroscope",names(X_extract))
+
 #5. From the data set in step 4, creates a second, independent tidy data set with the average of 
 #each variable for each activity and each subject.
 
@@ -77,5 +86,7 @@ X_averages<-
   summarize_all(mean)
 
 rm(X_extract)
+
+write.table(X_averages,file="tidy_assignment.txt",row.names=FALSE)
 
 X_averages
