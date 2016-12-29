@@ -4,15 +4,6 @@ EXPLANATION OF "run_analysis.R":
 
 What the code in the file "run_analysis.R" does is fulfill the Week 4 Getting and Cleaning Data Coursera assignment.
 
-Before coding the file, I used the following interactive code to download and start exploring the readme files:
-
-url="https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
-download.file(url,destfile="data.zip",method="curl")
-unzip("data.zip")
-setwd("UCI HAR Dataset")
-readme<-readLines("Readme.txt")
-features_info<-readLines("features_info.txt")
-
 First the training and test sets are loaded into R. Then the subjects and the activities.
 This is done using read.table( ). 
 The column names are taken from the "features.txt" file.
